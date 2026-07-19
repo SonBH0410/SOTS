@@ -1,0 +1,7 @@
+tensorflow>=2.12,<2.16
+tensorflow-probability>=0.20,<0.24
+numpy>=1.23,<2.0
+opencv-python>=4.7
+scikit-image>=0.19
+matplotlib>=3.6
+tqdm>=4.64
