@@ -5,6 +5,7 @@ Official code for:
 > **SOTS: Leveraging Self-supervised Pretraining for Label-Efficient Ovarian Tumor Segmentation in Ultrasound Images**
 > Hoang-Son Bui, Thanh-Phuc Dao, Thi-Lan Le
 > *Journal of Imaging Informatics in Medicine*, 2026
+> 
 > DOI: [10.1007/s10278-026-02138-0](https://doi.org/10.1007/s10278-026-02138-0)
 > Received 30 December 2025 · Revised 6 July 2026 · Accepted 7 July 2026
 > © The Author(s), under exclusive licence to the Society for Imaging Informatics in Medicine 2026
