@@ -28,9 +28,9 @@ DEFAULT_HYPERPARAMS = {
     ),
     "byol": dict(
         batch_size=8, epochs=200, lr=None, lr_scale_per_256=0.2,
-        warmup_epochs=10, warmup_epoch_fraction=None,
+        warmup_epochs=None, warmup_epoch_fraction=0.1,
         optimizer="sgd", use_schedule=True, run_eagerly=False,
-        project_dim=256, momentum=0.996, accum_steps=1,
+        project_dim=256, momentum=0.996, accum_steps=4,
     ),
     "moco": dict(
         batch_size=8, epochs=200, lr=1e-4, lr_scale_per_256=None,
@@ -40,15 +40,15 @@ DEFAULT_HYPERPARAMS = {
     ),
     "simclr": dict(
         batch_size=8, epochs=200, lr=None, lr_scale_per_256=0.3,
-        warmup_epochs=10, warmup_epoch_fraction=None,
+        warmup_epochs=None, warmup_epoch_fraction=0.1,
         optimizer="sgd", use_schedule=True, run_eagerly=False,
-        project_dim=128, temperature=0.5, accum_steps=1,
+        project_dim=128, temperature=0.5, accum_steps=4,
     ),
     "simsiam": dict(
         batch_size=8, epochs=200, lr=1e-4, lr_scale_per_256=None,
-        warmup_epochs=0, warmup_epoch_fraction=None,
+        warmup_epochs=None, warmup_epoch_fraction=0.1,
         optimizer="adam", use_schedule=False, run_eagerly=True,
-        project_dim=2048, accum_steps=1,
+        project_dim=2048, accum_steps=4,
     ),
 }
 
