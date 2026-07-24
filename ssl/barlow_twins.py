@@ -11,20 +11,33 @@ import tensorflow as tf
 
 from .base import SSLModel
 
-
-def off_diagonal(mat: tf.Tensor) -> tf.Tensor:
+def off_diagonal(mat):
     n = tf.shape(mat)[0]
     flat = tf.reshape(mat, [-1])[:-1]
-    off = tf.reshape(flat, (n - 1, n + 1))[:, 1:]
+    off  = tf.reshape(flat, (n - 1, n + 1))[:, 1:]
     return tf.reshape(off, [-1])
 
-
-def normalize_batch(z: tf.Tensor) -> tf.Tensor:
-    mean = tf.reduce_mean(z, axis=0, keepdims=True)
-    std = tf.math.reduce_std(z, axis=0, keepdims=True) + 1e-3
+def normalize_batch(z):
+    mean = tf.reduce_mean(z, axis = 0, keepdims = True)
+    std  = tf.math.reduce_std(z, axis = 0, keepdims = True) + 1e-3
     return (z - mean) / std
 
+def compute_top_k_bt_loss1(z1, z2s, lambd = 5e-3, top_k = 5):
+    """ z1 : (B, D) - z2 : (B, N, D) """
+    B = tf.cast(tf.shape(z1)[0], z1.dtype) 
+    z1_norm = normalize_batch(z1)
+    z2_norm_flat = normalize_batch(tf.reshape(z2s, [-1, tf.shape(z2s)[-1]]))
+    z2_norm = tf.reshape(z2_norm_flat, [B, tf.shape(z2s)[1], -1])  # (B, N, D)
+    c = tf.einsum('bi,bnj->nij', z1_norm, z2_norm) / B
+    
+    on  = tf.linalg.diag_part(c) - 1.0      # (N,D)
+    off = tf.vectorized_map(lambda m: tf.reshape(off_diagonal(m), [-1]), c)  # (N, D²-D)
 
+    loss_each = tf.reduce_sum(on**2, axis=1) + lambd * tf.reduce_sum(off**2, axis = 1)  # (N,)
+
+    topk = tf.nn.top_k(loss_each, k = top_k).values
+    return tf.reduce_mean(topk) 
+    
 def compute_barlow_twins_loss(z1: tf.Tensor, z2: tf.Tensor, lambd: float = 5e-3) -> tf.Tensor:
     """Standard Barlow Twins cross-correlation loss between two (B, D) embedding batches."""
     batch_size = tf.cast(tf.shape(z1)[0], z1.dtype)
@@ -55,7 +68,8 @@ class BarlowTwins(SSLModel):
         with tf.GradientTape() as tape:
             z1 = self.encoder(view1, training=True)
             z2 = self.encoder(view2, training=True)
-            loss = compute_barlow_twins_loss(z1, z2, self.lambd)
+            # loss = compute_barlow_twins_loss(z1, z2, self.lambd)
+            loss = compute_top_k_bt_loss1(z1, z2, self.lambd)
 
         self.accumulate_and_apply(tape, loss, self.encoder.trainable_variables)
 
