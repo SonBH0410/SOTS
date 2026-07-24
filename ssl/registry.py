@@ -21,7 +21,7 @@ from .method_names import METHODS
 # warmup_epochs: fixed epoch count, or None if derived from epochs via warmup_epoch_fraction.
 DEFAULT_HYPERPARAMS = {
     "barlow_twins": dict(
-        batch_size=4, epochs=200, lr=1e-3, lr_scale_per_256=None,
+        batch_size=8, epochs=200, lr=1e-3, lr_scale_per_256=None,
         warmup_epochs=None, warmup_epoch_fraction=0.1,
         optimizer="sgd", use_schedule=True, run_eagerly=False,
         project_dim=256, lambd=5e-3, accum_steps=4,
