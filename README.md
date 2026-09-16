@@ -110,8 +110,6 @@ coefficient, Jaccard/IoU similarity, precision, recall, and 95th-percentile Haus
 
 ## Citation
 
-## Citation
-
 If you find this work useful, please cite our paper:
 
 ```bibtex
