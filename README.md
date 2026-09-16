@@ -2,17 +2,7 @@
 
 Official code for:
 
-> **SOTS: Leveraging Self-supervised Pretraining for Label-Efficient Ovarian Tumor Segmentation in Ultrasound Images**
-> 
-> Hoang-Son Bui, Thanh-Phuc Dao, Thi-Lan Le
-> 
-> *Journal of Imaging Informatics in Medicine*, 2026
-> 
-> DOI: [10.1007/s10278-026-02138-0](https://doi.org/10.1007/s10278-026-02138-0)
-> 
-> Received 30 December 2025 · Revised 6 July 2026 · Accepted 7 July 2026
-> 
-> © The Author(s), under exclusive licence to the Society for Imaging Informatics in Medicine 2026
+> Bui, HS., Dao, TP. & Le, TL. SOTS: Leveraging Self-supervised Pretraining for Label-Efficient Ovarian Tumor Segmentation in Ultrasound Images. J Digit Imaging. Inform. med. (2026). https://doi.org/10.1007/s10278-026-02138-0
 
 This repository implements a VGG16-based segmentation pipeline where the encoder is first
 pretrained with a self-supervised learning (SSL) method on unlabeled ultrasound images, then
@@ -120,16 +110,18 @@ coefficient, Jaccard/IoU similarity, precision, recall, and 95th-percentile Haus
 
 ## Citation
 
-If you use this code or find it useful in your research, please cite:
+## Citation
+
+If you find this work useful, please cite our paper:
 
 ```bibtex
-@article{bui2026sots,
-  title   = {{SOTS}: Leveraging Self-supervised Pretraining for Label-Efficient Ovarian Tumor Segmentation in Ultrasound Images},
+@article{Bui2026,
   author  = {Bui, Hoang-Son and Dao, Thanh-Phuc and Le, Thi-Lan},
+  title   = {SOTS: Leveraging Self-supervised Pretraining for Label-Efficient Ovarian Tumor Segmentation in Ultrasound Images},
   journal = {Journal of Imaging Informatics in Medicine},
   year    = {2026},
-  doi     = {10.1007/s10278-026-02138-0},
-  url     = {https://doi.org/10.1007/s10278-026-02138-0}
+  doi     = {10.1007/s10278-026-02138-0}
+}
 }
 ```
 
